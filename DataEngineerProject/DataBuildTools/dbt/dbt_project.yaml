@@ -1,0 +1,12 @@
+name: 'dbt_project'
+version: '1.0.0'
+profile: 'my_profile'
+target-path: "target/"
+clean-targets:
+  - "target/"
+  - "dbt_packages/"
+
+models:
+  my_dbt_project:
+    example:
+      materialized: view
