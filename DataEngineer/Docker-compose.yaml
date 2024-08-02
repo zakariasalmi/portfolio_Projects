@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  spark:
+    build:
+      context: ./spark
+    container_name: spark
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    volumes:
+      - ./spark/jobs:/opt/spark/jobs
+    command: ["spark-submit", "--packages", "org.apache.hadoop:hadoop-aws:3.2.0", "--master", "local[*]", "/opt/spark/jobs/spark_amazon_reviews.py"]
+    
+  dbt:
+    build:
+      context: ./dbt
+    container_name: dbt
+    volumes:
+      - ./dbt:/dbt
+
+  airflow:
+    build:
+      context: ./airflow
+    container_name: airflow
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+      - AIRFLOW__CORE__FERNET_KEY=${FERNET_KEY}
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/scripts:/opt/airflow/scripts
+    ports:
+      - "8080:8080"
+    command: ["webserver"]
+
+  airflow_scheduler:
+    build:
+      context: ./airflow
+    container_name: airflow_scheduler
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+      - AIRFLOW__CORE__FERNET_KEY=${FERNET_KEY}
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/scripts:/opt/airflow/scripts
+    command: ["scheduler"]
