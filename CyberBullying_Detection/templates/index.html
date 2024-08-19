@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cyberbullying Detection</title>
+    <link rel="stylesheet" media="screen" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+    <div class="container">
+        <div class="message-box">
+            <h1>Cyberbullying Detection</h1>
+            {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+            <form action="/predict" method="POST">
+                <textarea name="text" rows="4" cols="50" placeholder="Enter text..."></textarea>
+                <br>
+                <input type="submit" value="Detect Cyberbullying">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
