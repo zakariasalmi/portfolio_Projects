@@ -2,7 +2,7 @@
 
 ## Models
 - **Model Naive bayes**: 
-- **Model Random Forest**: 
+- **Model RNN**: 
 
 ## Notebooks
 Each notebook contains the training and evaluation processes for the corresponding models.
