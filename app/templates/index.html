@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exprimez vos Sentiments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="home-container">
+        <div class="home-content">
+            <h1>Exprimez vos Sentiments</h1>
+            <form action="/predict" method="post">
+                <textarea name="text" placeholder="Écrivez votre texte ici..."></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+            <div class="result" id="result">
+                Sentiment: <span id="sentiment">neutre</span>
+            </div>
+            <footer>
+                © 2024 Analyse des Sentiments. Tous droits réservés.
+            </footer>
+        </div>
+    </div>
+    <script>
+        document.querySelector('form').onsubmit = async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('sentiment').innerText = result.sentiment;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* style.css */
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('seisme.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.home-container {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.home-content h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.home-content h1:before, .home-content h1:after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background-color: #333;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.home-content h1:before {
+    left: -60px;
+}
+
+.home-content h1:after {
+    right: -60px;
+}
+
+form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea {
+    width: 80%;
+    height: 150px;  /* Agrandir la hauteur du textarea */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;  /* Ajouter de l'espace entre le textarea et le bouton */
+    font-size: 1em;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5cb85c;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #777;
+}

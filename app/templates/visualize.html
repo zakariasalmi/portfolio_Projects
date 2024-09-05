@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation des Sentiments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="home-container">
+        <div class="home-content">
+            <h1>Visualisation des Sentiments</h1>
+            <canvas id="sentimentChart"></canvas>
+        </div>
+    </div>
+    <script>
+        async function fetchSentimentData() {
+            const response = await fetch('/sentiment_data');
+            const data = await response.json();
+            return data;
+        }
+
+        async function renderChart() {
+            const sentimentData = await fetchSentimentData();
+            const ctx = document.getElementById('sentimentChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(sentimentData),
+                    datasets: [{
+                        data: Object.values(sentimentData).map(value => value * 100),  // Convertir en pourcentage
+                        backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#ff6384'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribution des Sentiments'
+                        }
+                    }
+                },
+            });
+        }
+
+        renderChart();
+    </script>
+</body>
+</html>
