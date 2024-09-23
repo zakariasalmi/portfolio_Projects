@@ -13,6 +13,13 @@ Key Features
 Access to Open Data: StatsBomb provides high-quality, open-source football data.
 Detailed Match Insights: Analyze team tactics, player performances, and match outcomes.
 Easy to Use: The code is modular and easily adaptable for different analysis needs.
+
+![Screenshot 2024-09-23 211740](https://github.com/user-attachments/assets/b78cb8ec-bc32-41d8-b9cc-7988e9bf5711)
+![Screenshot 2024-09-23 211908](https://github.com/user-attachments/assets/7291812e-e18c-4592-8b82-1077a4db1dd7)
+![Screenshot 2024-09-23 212032](https://github.com/user-attachments/assets/46e28078-55f6-4817-acca-3eee46085493)
+![Screenshot 2024-09-23 212119](https://github.com/user-attachments/assets/62825df2-6987-4f4e-adf5-ec77fd69acb6)
+
+
 Requirements
 To replicate or extend the analysis, you’ll need:
 
