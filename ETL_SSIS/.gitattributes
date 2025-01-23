@@ -1,2 +1,0 @@
-ETL_SSIS/postgresql_13.exe filter=lfs diff=lfs merge=lfs -text
-postgresql_13.exe filter=lfs diff=lfs merge=lfs -text
