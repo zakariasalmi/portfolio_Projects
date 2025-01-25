@@ -4,9 +4,9 @@ Bienvenue sur mon portfolio de projets ! Ici, vous trouverez une sélection de p
 
 ## Projets Inclus
 
-# Sentiment Analysis: 
+### Sentiment Analysis: 
 Analyzing sentiments from social media comments in Arabic and Moroccan Darija.
-# Analysis of supermarket sales
-# Real-time data streaming project
-# Intelligent Agriculture - Connected greenhouse
-# AI in Football Analytics: Player and ball detection, match statistics extraction.
+### Analysis of supermarket sales
+### Real-time data streaming project
+### Intelligent Agriculture - Connected greenhouse
+### AI in Football Analytics: Player and ball detection, match statistics extraction.
