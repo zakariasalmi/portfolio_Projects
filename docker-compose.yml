@@ -1,0 +1,59 @@
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_previsions_data:/var/lib/postgresql/data  # Correction du chemin du volume
+
+  webserver:
+    image: apache/airflow:2.4.3
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__WEBSERVER__SECRET_KEY: my_secret_key_1
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts  # Correction du chemin du volume
+      - ./data:/opt/airflow/data
+      - ./requirement.txt:/opt/airflow/requirement.txt  # Correction du chemin
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "airflow db init &&
+               airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com &&
+               airflow webserver"
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ] && ps -p $(cat /usr/local/airflow/airflow-webserver.pid)"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 30s
+
+  scheduler:
+    image: apache/airflow:2.4.3
+    depends_on:
+      - webserver
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__WEBSERVER__SECRET_KEY: my_secret_key_1
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts  # Correction du chemin du volume
+      - ./data:/opt/airflow/data
+      - ./requirement.txt:/opt/airflow/requirement.txt  # Correction du chemin
+    command: airflow scheduler
+
+volumes:
+  postgres_previsions_data:  # Déclaration du volume
