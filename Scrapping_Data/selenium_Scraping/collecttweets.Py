@@ -14,7 +14,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--disable-notifications")
 
 # Set up the WebDriver
-service = Service('C:/Users/zakar/Downloads/chromedriver-win64/chromedriver.exe')
+service = Service('chromedriver-win64/chromedriver.exe') #path to the driver
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Function to log in to Twitter via Google
